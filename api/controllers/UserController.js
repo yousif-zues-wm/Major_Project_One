@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+
 		find: function(req, res,next){
 			var id = req.param('id');
 			User.find(id, {isEnabled: false}).exec(function(err, user){
@@ -99,8 +100,11 @@ module.exports = {
 			res.redirect('user/show/' + user.id);
 		 });
 	 },
+
 	 show: function(req, res, next){
-		 User.findOne(req.param('id')).exec(function(err, user){
+		 var id = req.param('id');
+		 User.findOne(id).exec(function(err, user){
+			 console.log(req.session.authenticated);
 			 if (err) {
 			 	return res.serverError(err);
 			 }
@@ -115,13 +119,16 @@ module.exports = {
 
 	 index1: function(req, res, next){
 		 var id = req.param('id');
+		 console.log(new Date());
+		 console.log(req.session.cookie.authenticated);
 		 User.find(id, {isEnabled: false}).exec(function(err, users){
 			 if (err) {
 			 	return res.serverError(err);
 			 }
 			 res.view({
-				 users: users
+				 users : users
 			 });
+
 		 });
 	 },
 

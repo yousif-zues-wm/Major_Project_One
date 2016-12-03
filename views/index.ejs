@@ -1,6 +1,3 @@
-
-
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -14,6 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="http://cdn.kik.com/kik/2.3.6/kik.js"></script>
 <style media="screen">
 .chat {
   list-style: none;
@@ -427,6 +425,7 @@ li.active a {
     <ul>
       <li class="active"><a href="/">Home</a></li>
       <li ><a href="/user/index1">Users</a></li>
+      <li><a href="/session/new">Sign-In</a></li>
       <li><a href="/user/new">Register</a></li>
       <li><a href="#">Profile</a></li>
       <li><a href="#">Edit</a></li>
@@ -466,6 +465,17 @@ $('#myModal').on('shown.bs.modal', function () {
     elem.scrollTop = elem.scrollHeight;
 });
 }
+
+</script>
+<script type="text/javascript">
+  if(kik.enabled){
+    console.log('running');
+  }
+  else if(!kik.enabled){
+    console..log('Bot is Down!!');
+  }
+
+
 
 </script>
   </body>

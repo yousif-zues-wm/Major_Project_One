@@ -50,7 +50,7 @@ color: #666;
 li.active a {
 font-weight: bold;
 color: #333;
-}
+} 
     </style>
   </head>
   <body>
@@ -97,9 +97,9 @@ color: #333;
               <td>
                 <%= users.email %>
               </td>
-              <td><a class='btn btn-success' href="/user/show/ <%= users.id %>">Show</a></td>
-              <td><a class='btn btn-info' href="/user/edit/ <%= users.id %>">Edit</a></td>
-              <td><a class='btn btn-danger' href="/user/destroy/ <%= users.id %>">Delete</a></td>
+              <td><a class='btn btn-success' href="/user/show/<%= users.id %>">Show</a></td>
+              <td><a class='btn btn-info' href="/user/edit/<%= users.id %>">Edit</a></td>
+              <td><a class='btn btn-danger' href="/user/destroy/<%= users.id %>">Delete</a></td>
 
             </tr>
             <%  }) %>

@@ -1,0 +1,90 @@
+{
+  "data": {
+    "register": [],
+    "user": [
+      {
+        "name": "zeus22",
+        "email": "asd1@gmail.com",
+        "password": "123456",
+        "isEnabled": true,
+        "admin": false,
+        "createdAt": "2016-11-22T01:53:26.717Z",
+        "updatedAt": "2016-11-22T01:53:39.387Z",
+        "id": 1
+      }
+    ]
+  },
+  "schema": {
+    "register": {
+      "name": {
+        "type": "text"
+      },
+      "email": {
+        "type": "string"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "isEnabled": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "admin": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "name": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "isEnabled": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "admin": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "password": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "register": {},
+    "user": {
+      "id": 1
+    }
+  }
+}

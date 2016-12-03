@@ -20,8 +20,27 @@ module.exports = {
     password: {
       type: "string",
       required: true
-    }
+    },
+    toJSON: function(){
+    var obj = this.toObject();
+    delete obj.password;
+    delete obj.encryptedPassword;
+    delete obj.name;
+    delete obj._csrf;
+    delete obj;
+      }
+  },
 
+
+    beforeCreate : function(values, next){
+      require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
+          if (err) return next(err);
+          values.encryptedPassword = encryptedPassword;
+          // values.online = true;
+          next();
+      });
+
+    }
     // toJSON: function(){
     //   var obj = this.toObject();
     //   delete obj.password;
@@ -30,5 +49,4 @@ module.exports = {
     //   return obj;
     // }
 
-  }
 };

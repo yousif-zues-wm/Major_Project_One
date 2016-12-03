@@ -60,8 +60,8 @@ module.exports.connections = {
       adapter: 'sails-mongo',
       host: 'localhost',
       port: 27017,
-      user: 'admin', //optional
-      password: 'turnipforprez', //optional
+      // user: 'admin', //optional
+      // password: 'turnipforprez', //optional
       database: 'kikBot' //optional
     },
   /**************************************************************************
