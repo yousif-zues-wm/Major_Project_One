@@ -32,15 +32,26 @@ module.exports = {
   },
 
 
-    beforeCreate : function(values, next){
-      require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
-          if (err) return next(err);
-          values.encryptedPassword = encryptedPassword;
-          // values.online = true;
-          next();
-      });
+  new: function (inputs, cb) {
+      // Create a user
+      User.create({
+        name: inputs.name,
+        email: inputs.email,
+        // TODO: But encrypt the password first
+        password: inputs.password
+      })
+      .exec(cb);
+    },
 
-    }
+    attemptLogin: function (inputs, cb) {
+
+    User.findOne({
+      email: inputs.email,
+
+      password: inputs.password
+    })
+    .exec(cb);
+  }
     // toJSON: function(){
     //   var obj = this.toObject();
     //   delete obj.password;

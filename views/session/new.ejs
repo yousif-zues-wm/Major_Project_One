@@ -82,23 +82,22 @@ li.active a {
   </ul>
 </nav>
     <div class="jumbotron">
-    <form class="form-signin" action="session/create" method="post">
+    <form class="form-signin" action="/session/newSession" method="POST" enctype='application/json'>
         <h2 class='form-signin-heading'>Sign in</h2>
 
 
-        <% if(flash && flash.err){ %>
-          <ul class='alert alert-danger'>
-          <% Object.keys(flash.err).forEach(function(error){ %>
-          <li>   <% JSON.stringify(flash.error[error]) %>
-        <% }); %>
-      </ul>
-        <% } %>
 
         <br>
-        <p> Email: </p><input type="text" class="form-control" placeholder='Email Address' name="email" ><br>
-      <p>Password: </p><input type="password" class="form-control" placeholder='Password' name="password" ><br>
-      <input type="button" name="submit" value="Sign-in" class='btn btn-info'/>
-      <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        <p>
+          Email:
+        </p>
+        <input class="form-control" ng-model='Email' name='email' type='email' placeholder="Email" maxength='32' required/><br>
+        <p>
+          Password:
+        </p>
+        <input class="form-control password" type="password" name="password" id='password' placeholder="Password" maxength='32' required/><br>
+        <input class="btn btn-info" type="submit" value='Sign-in'/>
+        <input  type="hidden" name="_csrf" value="<%= _csrf %>" />
     </form>
   </div>
 

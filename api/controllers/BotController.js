@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+	
 		index1: function(req, res, next){
 			var id = req.param('id');
 			User.find(id, {isEnabled: true}).exec(function(err, bot){

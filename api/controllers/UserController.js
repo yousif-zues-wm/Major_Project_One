@@ -7,6 +7,58 @@
 
 module.exports = {
 
+	login: function(req, res, next){
+		console.log(req.param('password'))
+
+
+	    return res.login({
+	      email: req.param('email'),
+	      password: req.param('password'),
+	      successRedirect: '/',
+	      // invalidRedirect: '/user/login'
+	    });
+
+	},
+
+	logout: function (req, res) {
+    req.session.me = null;
+    if (req.wantsJSON) {
+      return res.ok('Logged out successfully!');
+    }
+    return res.redirect('/');
+  },
+
+		// newSession : function(req, res, next){
+		// 	console.log('Action');
+		// 	User.findOne(req.param('email')).exec(function(err, user){
+		// 		console.log(req.param('email'));
+		// 		if(err){
+		// 			return res.serverError(err);
+		// 		}
+		// 		else{
+		// 			if (req.param('password') == user.password) {
+		// 				res.session.user = user;
+		// 				res.redirect('/');
+		// 			}
+		// 			else{
+		// 				res.render('login Jade', {error: "invalid Email/ Password"});
+		// 			}
+		// 		}
+		//
+		// })
+		//
+		// logout : function(req,res,next){
+		// 	res.session.reset();
+		// 	res.redirect('/');
+		// }
+
+		// 'test' : function(req, res, next){
+		// 	res.view('/session/test');
+		// 	console.log('working');
+		// },
+
+
+
 		find: function(req, res,next){
 			var id = req.param('id');
 			User.find(id, {isEnabled: false}).exec(function(err, user){
@@ -88,6 +140,9 @@ module.exports = {
 		res.locals.flash = _.clone(req.session.flash);
 		res.view();
 		req.session.flash = {};
+		res.redirect('/user/index1');
+
+
 	},
 
 	 create: function(req, res, next){
