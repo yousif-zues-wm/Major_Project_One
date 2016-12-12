@@ -53,6 +53,11 @@ module.exports.models = {
             type: 'boolean',
             required: true,
             defaultsTo: false
+        },
+        sid : {
+          type: 'string',
+          required: true,
+          defaultsTo: 'null'
         }
 }
 

@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -12,9 +11,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="http://cdn.kik.com/kik/2.3.6/kik.js"></script>
     <style media="screen">
+      .jumbotron{
+        text-align: center;
+      }
       .form-control{
-        width: 25%
+          width: 25%;
+          margin-left: 37%
       }
       * {
   margin: 0;
@@ -65,38 +69,37 @@ li.active a {
 }
     </style>
   </head>
-  <body >
-    <center>
-    <div style='margin-top:7%;' class="container jumbotron">
-      <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/user/index1">Users</a></li>
-      <li><a href="/user/new">Register</a></li>
-      <li><a href="#">Profile</a></li>
-      <li class="active"><a href="#">Edit</a></li>
-      <li><a href="/user/login">Sign-in</a></li>
-    </ul>
-  </nav>
-    <form class="form-signin" action="/user/update/<%= user.id %>" method="post">
-      <h2>Editing <%= user.name %></h2><br>
-      <p>
-        Name
-      </p>
-      <input type="text" class='form-control' placeholder="name" name="name" value="<%= user.name %>"/><br>
-      <p>
-        Email
-      </p>
-      <input type="text" placeholder='email' class='form-control' name="email" value="<%= user.email %>"/><br>
-      <p>
-        Password
-      </p>
-      <input type="password"  class= 'form-control' name="password" value="<%= user.password %>"/><br>
-      <input type="submit" class='btn btn-info' value="Proceed"/>
-      <input type="hidden" name="_csrf" value="<%= _csrf %>">
+  <body>
+    <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/user/index1">Users</a></li>
+    <li><a href="/user/new">Register</a></li>
+    <li class='active'><a href="/user/login">Sign-In</a></li>
+    <li><a >Profile</a></li>
+    <li><a href="#">Edit</a></li>
+
+  </ul>
+</nav>
+    <div class="jumbotron">
+    <form class="form-signin" action="/user/signin" method="POST" enctype='application/json'>
+        <h2 class='form-signin-heading'>Sign in</h2>
+
+
+        <h1 style='color:red'>Login Failed</h1>
+        <br>
+        <p>
+          Email:
+        </p>
+        <input class="form-control" ng-model='Email' name='email' type='email' placeholder="Email" maxength='32' required/><br>
+        <p>
+          Password:
+        </p>
+        <input class="form-control password" type="password" name="password" id='password' placeholder="Password" maxength='32' required/><br>
+        <input class="btn btn-info" type="submit" value='Sign-in'/>
+        <input  type="hidden" name="_csrf" value="<%= _csrf %>" />
     </form>
   </div>
-</center>
 
-</body>
+  </body>
 </html>

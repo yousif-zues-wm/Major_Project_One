@@ -7,20 +7,64 @@
 
 module.exports = {
 
-	login: function(req, res, next){
-		console.log(req.param('password'))
 
+		login: function(req, res, next){
+			// console.log(req.param('password'))
+			//res.view('/user/login')
+			res.view('user/login');
 
-	    return res.login({
-	      email: req.param('email'),
-	      password: req.param('password'),
-	      successRedirect: '/',
-	      // invalidRedirect: '/user/login'
-	    });
+		},
+
+		signin: function(req, res, next){
+			var emailAddr = req.param('email');
+			var pass = req.param('password');
+			User.findOne({email : req.param('email'), password: req.param('password'), isEnabled: false}).exec(function(err, user){
+			if (err) {
+				return req.flash('Error')
+			}
+			if (user === undefined) {
+					res.redirect('/user/loginF')
+			}
+			else{
+
+			console.log('Success');
+			req.session.regenerate(function(err) {
+
+				console.log(req.sessionID)
+				User.update(req.param('name'), {sid: req.sessionID}).exec(function(err, user) {
+					if (err) {
+					return res.serverError(err)}
+				})
+			})
+			res.redirect('/');
+			console.log(user.sid);
+		}
+
+			// console.log(user.name);
+		})
 
 	},
 
+	loginF: function(req, res, next){
+		// console.log(req.param('password'))
+		//res.view('/user/login')
+		res.view('user/loginF');
+
+	},
+	// login: function(req, res, next){
+	// 	// console.log(req.param('password'))
+	// 	//res.view('/user/login')
+	//     return res.login({
+	//       email: req.param('email'),
+	//       password: req.param('password'),
+	//       successRedirect: '/',
+	//       invalidRedirect: '/user/login'
+	//     });
+
+
+
 	logout: function (req, res) {
+		console.log(req.session.me)
     req.session.me = null;
     if (req.wantsJSON) {
       return res.ok('Logged out successfully!');
@@ -140,7 +184,7 @@ module.exports = {
 		res.locals.flash = _.clone(req.session.flash);
 		res.view();
 		req.session.flash = {};
-		res.redirect('/user/index1');
+
 
 
 	},
@@ -152,14 +196,15 @@ module.exports = {
 			 }
 			//  return res.redirect('/user/new');
 			//  return res.jsonx(user);
+
 			res.redirect('user/show/' + user.id);
+			console.log(user.sid)
 		 });
 	 },
 
 	 show: function(req, res, next){
 		 var id = req.param('id');
 		 User.findOne(id).exec(function(err, user){
-			 console.log(req.session.authenticated);
 			 if (err) {
 			 	return res.serverError(err);
 			 }
@@ -175,7 +220,43 @@ module.exports = {
 	 index1: function(req, res, next){
 		 var id = req.param('id');
 		 console.log(new Date());
-		 console.log(req.session.cookie.authenticated);
+
+		//  User.findOne({sid: req.sessionID}).exec(function(err, user){
+		// 	 if (err) {
+		// 		return serverError(err);
+		// 	 }
+		// 		 res.redirect('user/index1u')
+		//  })
+
+		 User.find(id, {isEnabled: false}).exec(function(err, users){
+			 console.log(req.param('session'))
+			 if (err) {
+			 	return res.serverError(err);
+			 }
+			 console.log(req.sessionID);
+			//  User.findOne({sid: req.sessionID}).exec(function(err, user){
+			// 	if (err) {
+			// 		return res.serverError(err)
+			// 	}
+			// 	console.log(user.sid);
+			//  });
+			 res.view({
+				 users : users
+			 });
+
+		 });
+	 },
+
+	 index1u: function(req, res, next){
+		 var id = req.param('id');
+		 User.findOne({sid: req.sessionID}).exec(function(err, user){
+			 if (err) {
+				return serverError(err);
+			 }
+			 res.view({
+				 user: user
+			 })
+		 })
 		 User.find(id, {isEnabled: false}).exec(function(err, users){
 			 if (err) {
 			 	return res.serverError(err);
@@ -186,6 +267,8 @@ module.exports = {
 
 		 });
 	 },
+
+
 
 	 edit: function(req, res, next){
 		 var id = req.param('id');

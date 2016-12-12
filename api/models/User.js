@@ -21,14 +21,15 @@ module.exports = {
       type: "string",
       required: true
     },
-    toJSON: function(){
-    var obj = this.toObject();
-    delete obj.password;
-    delete obj.encryptedPassword;
-    delete obj.name;
-    delete obj._csrf;
-    delete obj;
-      }
+
+  //   toJSON: function(){
+  //   var obj = this.toObject();
+  //   delete obj.password;
+  //   delete obj.encryptedPassword;
+  //   delete obj.name;
+  //   delete obj._csrf;
+  //   delete obj;
+  //     }
   },
 
 
@@ -47,7 +48,6 @@ module.exports = {
 
     User.findOne({
       email: inputs.email,
-
       password: inputs.password
     })
     .exec(cb);
