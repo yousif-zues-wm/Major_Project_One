@@ -26,12 +26,11 @@ module.exports = {
 					res.redirect('/user/loginF')
 			}
 			else{
-
 			console.log('Success');
 			req.session.regenerate(function(err) {
 
 				console.log(req.sessionID)
-				User.update(req.param('name'), {sid: req.sessionID}).exec(function(err, user) {
+				User.update(req.param('id'), {sid: req.sessionID}).exec(function(err, user) {
 					if (err) {
 					return res.serverError(err)}
 				})
@@ -64,8 +63,10 @@ module.exports = {
 
 
 	logout: function (req, res) {
-		console.log(req.session.me)
-    req.session.me = null;
+		var sid = req.param('sid');
+		User.find()
+    req.param('sid') = null;
+
     if (req.wantsJSON) {
       return res.ok('Logged out successfully!');
     }
@@ -218,6 +219,7 @@ module.exports = {
 	 },
 
 	 index1: function(req, res, next){
+		 console.log(req.sessionID)
 		 var id = req.param('id');
 		 console.log(new Date());
 
@@ -229,34 +231,47 @@ module.exports = {
 		//  })
 
 		 User.find(id, {isEnabled: false}).exec(function(err, users){
-			 console.log(req.param('session'))
+
+
 			 if (err) {
 			 	return res.serverError(err);
 			 }
-			 console.log(req.sessionID);
-			//  User.findOne({sid: req.sessionID}).exec(function(err, user){
-			// 	if (err) {
-			// 		return res.serverError(err)
-			// 	}
-			// 	console.log(user.sid);
-			//  });
+			 var sid = req.param('sid')
+
+			 User.findOne({sid: sid}).exec(function(err, user){
+				if (err) {
+					return res.serverError(err)
+				}
+
+				console.log(user);
+
+				if (user != undefined) {
+				// res.redirect('user/index1u')
+				console.log(user.id)
+			}
+
+				// console.log(user.sid);
+			 });
+
 			 res.view({
 				 users : users
 			 });
-
 		 });
 	 },
 
 	 index1u: function(req, res, next){
 		 var id = req.param('id');
-		 User.findOne({sid: req.sessionID}).exec(function(err, user){
-			 if (err) {
-				return serverError(err);
+		 var sid = req.param('sid')
+		 User.findOne({sid : sid}).exec(function(erro, me){
+			 if (erro) {
+				return res.serverError(erro);
 			 }
-			 res.view({
-				 user: user
-			 })
-		 })
+			//  res.view({
+			// 	 me: me
+			//  })
+			if (me === undefined) {
+				res.redirect('user/index1')
+			}
 		 User.find(id, {isEnabled: false}).exec(function(err, users){
 			 if (err) {
 			 	return res.serverError(err);
@@ -265,7 +280,8 @@ module.exports = {
 				 users : users
 			 });
 
-		 });
+		 })
+		 })
 	 },
 
 
