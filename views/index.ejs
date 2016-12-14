@@ -417,6 +417,22 @@ li.active a {
   font-weight: bold;
   color: #333;
 }
+#pH{
+  color: black;
+  text-align: center;
+}
+#b{
+  color:black
+}
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
+}
+
 </style>
   </head>
   <body>
@@ -435,10 +451,76 @@ li.active a {
     </ul>
   </nav>
     <div class="jumbotron" id='welcome'><br>
-      <h2>Welcome to the kik Bot</h2><br>
-      <p> We Will Get it running Soon!!</p>
+      <h2>Personal Portfolio</h2><br>
+      <p> A Place to Showcase all of my Coding Projects!!</p>
 
     </div>
+
+
+
+    <div id='pH' class="col-sm-5">
+      <div style='background-color:#2196F3; color:white; border-radius:25px;margin-top:88%;position:relative;margin-left:3% ;' class="jumbotron">
+      <span style='font-size:200%;' class='glyphicon glyphicon-signal'></span> <p>Year One (LAMP)</p>
+    </div>
+
+    </div>
+    <div id='pH' class="col-sm-5">
+      <div style='background-color:#2196F3; color:white; border-radius:25px;margin-top:88%; position:relative;left:42%;' class="jumbotron">
+      <span style='font-size:200%' class='glyphicon glyphicon-list-alt'></span><p>Year 2 (MEAN)</p>
+    </div>
+    <div id='pH' class="col-sm-5">
+      <div style='background-color:#BBDEFB; color:white; border-radius:25px;margin-left:96%;width:240%;margin-top:-23%;z-index:-1;height:400px;' class="jumbotron">
+        <table style='color:black;border-color: black;' class="table table-borderless">
+          <thead>
+            <tr>
+                <th>Project Name</th>
+              <th>Filesize</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Passport Project One</td>
+              <td><a href="files/passport-project-1.zip" download>5.6 Mb</a></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Debbie</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>John</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div id='pH' class="col-sm-5">
+      <div style='background-color:#BBDEFB; color:white; border-radius:25px;margin-left:-669%;width:635%;margin-top:-70%;z-index:-1;height:400px;' class="jumbotron">
+<table style='color:black;border-color: black;' class="table table-borderless">
+  <thead>
+    <tr>
+        <th>Project Name</th>
+      <th>Filesize</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Anna</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Debbie</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>John</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    </div>
+      <h1>Coding Projects</h1><br>
+      <a href="https://github.com/yousif-zues-wm?page=1&tab=repositories"><h2>See me on Git</h2></a>
   </center>
   <script type="text/javascript">
   $( ".big-circle" ).hover(function() {
@@ -450,7 +532,7 @@ li.active a {
   </script>
   <script type='text/javascript'>
 window.onload=function(){
-//When user clicks link
+
 $('#myModal').on('shown.bs.modal', function () {
     var elem = document.getElementById('reverse_scroll');
     elem.scrollTop = elem.scrollHeight;

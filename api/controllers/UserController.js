@@ -30,13 +30,14 @@ module.exports = {
 			req.session.regenerate(function(err) {
 
 				console.log(req.sessionID)
-				User.update(req.param('id'), {sid: req.sessionID}).exec(function(err, user) {
+				User.update({email : req.param('email')}, {sid: req.sessionID}).exec(function(err, user) {
+					console.log('id ' + req.sessionID)
 					if (err) {
 					return res.serverError(err)}
 				})
 			})
 			res.redirect('/');
-			console.log(user.sid);
+			console.log('id' + user.sid);
 		}
 
 			// console.log(user.name);
@@ -64,8 +65,12 @@ module.exports = {
 
 	logout: function (req, res) {
 		var sid = req.param('sid');
-		User.find()
-    req.param('sid') = null;
+		User.update({sid : req.param('sid')} , {sid : null}).exec(function(err, user){
+				if (err) {
+						return res.serverError(err)
+				}
+		});
+
 
     if (req.wantsJSON) {
       return res.ok('Logged out successfully!');
@@ -238,7 +243,7 @@ module.exports = {
 			 }
 			 var sid = req.param('sid')
 
-			 User.findOne({sid: sid}).exec(function(err, user){
+			 User.findOne({sid: req.sessionID}).exec(function(err, user){
 				if (err) {
 					return res.serverError(err)
 				}
@@ -247,8 +252,13 @@ module.exports = {
 
 				if (user != undefined) {
 				// res.redirect('user/index1u')
-				console.log(user.id)
+
+
 			}
+			// console.log(user.name)
+			console.log('id ' + req.sessionID)
+			console.log('sid ' + req.param('sid'))
+
 
 				// console.log(user.sid);
 			 });
