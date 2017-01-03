@@ -208,8 +208,20 @@ module.exports = {
 		 });
 	 },
 
+	 nf: function(req,res,next){
+		 User.find(req.param('id')).exec(function(err, user){
+			 if (err) {
+			 	return res.serverError(err)
+			 }
+				res.view({user: user})
+		 })
+	 },
+
 	 show: function(req, res, next){
 		 var id = req.param('id');
+		 if (id == null || id == "") {
+		 	res.redirect('user/nf')
+		 }
 		 User.findOne(id).exec(function(err, user){
 			 if (err) {
 			 	return res.serverError(err);
@@ -220,6 +232,7 @@ module.exports = {
 			 res.view({
 				 user: user
 			 });
+
 		 });
 	 },
 
@@ -252,20 +265,36 @@ module.exports = {
 
 				if (user != undefined) {
 				// res.redirect('user/index1u')
-
-
+				console.log('User Found!!')
 			}
 			// console.log(user.name)
 			console.log('id ' + req.sessionID)
-			console.log('sid ' + req.param('sid'))
+			console.log('sid:' + {sid: req.sessionID})
 
 
 				// console.log(user.sid);
 			 });
 
-			 res.view({
-				 users : users
+			 User.findOne({sid: req.sessionID}).exec(function(err, user1){
+				 if (err) {
+				 	return res.serverError(err)
+				 }
+				 if (user1 === undefined) {
+				 		console.log('User Logged Out')
+						console.log(req.sessionID)
+						res.view({
+							 users : users
+						 });
+				 }
+				 else{
+					 console.log(user1)
+					 res.view({users: users},
+						 {user1: user1})
+
+
+				 }
 			 });
+
 		 });
 	 },
 
